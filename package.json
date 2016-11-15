@@ -1,0 +1,30 @@
+{
+  "name": "cronic",
+  "version": "0.0.1",
+  "description": "PHP 7 Framework w/ Node-Based Command Line Tools (CLI)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErikAugust/cronic.git"
+  },
+  "keywords": [
+    "PHP",
+    "PHP 7"
+  ],
+  "author": "Erik August Johnson <erik@erikaugust.com>",
+  "license": "ISC",
+  "bin": {
+    "cronic": "./index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/ErikAugust/cronic/issues"
+  },
+  "homepage": "https://github.com/ErikAugust/cronic#readme",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "commander": "^2.9.0"
+  }
+}
