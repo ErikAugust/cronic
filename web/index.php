@@ -1,9 +1,19 @@
 <?php
 
-// Base include file:
+/**
+ * @description Cronic - Front Controller
+ * @author Erik August Johnson <erik@erikaugust.com>
+ * @version 0.0.1
+ */
+
+/**
+ * Base include file - adds vendor autoload, etc.
+ */
 require_once __DIR__.'/../php/base_include.php';
 
-// Use Symfony components:
+/**
+ * Use Symfony Components:
+ */
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -11,23 +21,36 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 
 use Symfony\Component\Routing\RouteCollection;
+
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Routing\Loader\YamlFileLoader;
+
 use Silex\Application;
 
-// Use app models:
+
+/**
+ * Use custom models and controllers:
+ */
 use models\Base;
 use controllers\AppController;
 
-// Init Silex:
+
+
+/**
+ * Initialize Silex application:
+ */
 $app = new Application();
 
-// Session handler - stores session in "../php/session"
+/**
+ * Session
+ */
 $app->register(new Silex\Provider\SessionServiceProvider(), array(
     'session.storage.save_path' => __DIR__.'/../php/session',
 ));
 
-// Decodes headers with JSON Content-Type automatically
+/**
+ * Auto-decodes JSON requests to PHP array
+ */
 $app->before(function (Request $request) {
     if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
         $data = json_decode($request->getContent(), true);
@@ -35,7 +58,9 @@ $app->before(function (Request $request) {
     }
 });
 
-// Init Cookie -> Session handling
+/**
+ * Auto-converts cookies to session variables:
+ */
 /*$app->before(function (Request $request) use ($app) {
     if(!$app['session']->has("Example")) {
         $cookies = $request->cookies;
@@ -45,19 +70,26 @@ $app->before(function (Request $request) {
     }
 });*/
 
-// Twig HTML templating/rendering
+/**
+ * Twig Templating
+ */
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../php/views',
 ));
 
 
-// Route to SPA index twig template:
+/**
+ * Routing: Front controller
+ */
 $app->get('/', function () use ($app) {
     return $app['twig']->render('hello_world.twig');
 });
 
-// Extended routes - for REST API creation - generated routes are located in /../php/config/routes.yml
-/*$app['routes'] = $app->extend('routes', function (RouteCollection $routes, Application $app) {
+/**
+ * Routing: Extended
+ * Auto-generated routes in YAML format - php/config/routes.yml
+ */
+$app['routes'] = $app->extend('routes', function (RouteCollection $routes) {
 
     $locator = new FileLocator(array(__DIR__ . "/../php/config/"));
     $loader = new YamlFileLoader($locator);
@@ -66,9 +98,16 @@ $app->get('/', function () use ($app) {
     $routes->addCollection($collection);
 
     return $routes;
-});*/
+});
 
 
-// App debug mode - when set to TRUE app will display errors.
+/**
+ * Application Debug Mode Toggle
+ */
 $app['debug'] = true;
+
+
+/**
+ * Run Application
+ */
 $app->run();
