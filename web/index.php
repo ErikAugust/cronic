@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @description Cronic - Front Controller
+ * @description Cronic - Front Controller (index.php)
  * @author Erik August Johnson <erik@erikaugust.com>
  * @version 0.0.1
  */
@@ -79,7 +79,8 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 
 /**
- * Routing: Front controller
+ * Routing: Front Controller
+ * Add custom routes below:
  */
 $app->get('/', function () use ($app) {
     return $app['twig']->render('hello_world.twig');
