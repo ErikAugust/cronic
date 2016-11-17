@@ -42,7 +42,7 @@ Thumbs.db
 
 # Database #
 ################
-php/config/database.ini
+php/config/*.ini
 php/logs/*
 
 # Session #
