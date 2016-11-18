@@ -1,6 +1,6 @@
 {
   "name": "cronic",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "PHP 7 Framework w/ Node-Based Command Line Tools (CLI)",
   "main": "index.js",
   "scripts": {
