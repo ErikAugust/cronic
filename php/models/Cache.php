@@ -10,7 +10,7 @@ namespace models;
 class Cache {
 
     public function __construct($redis = 'default', $memcache = 'default') {
-        //$this->redis = self::redisSetup($redis);
+        $this->redis = self::redisSetup($redis);
         $this->memcache = self::memcacheSetup($memcache);
 
         return $this;
@@ -19,10 +19,18 @@ class Cache {
     /**
      * @name redisSetup
      * @return \Redis
+     * @throws \Exception
      */
-    public static function redisSetup() {
-        $redis = new \Redis() or die("Cannot load redis module.");
-        $redis->connect('127.0.0.1');
+    public static function redisSetup($connection = 'default') {
+        /**
+         * Load from INI file:
+         */
+        if (!$settings = parse_ini_file(REDIS_SETTINGS_DIR, TRUE)) {
+            throw new \Exception('Unable to open ' . REDIS_SETTINGS_DIR . '.');
+        }
+
+        $redis = new \Redis;
+        $redis->connect($settings[$connection]['host']);
         return $redis;
     }
 
@@ -51,7 +59,9 @@ class Cache {
             }
         } else {
             $memcache = new \Memcached();
-            $memcache->addServer($settings[$connection]['host'], $settings[$connection]['port']);
+            if (!$memcache->addServer($settings[$connection]['host'], $settings[$connection]['port'])) {
+                throw new \Exception('Unable to connect to Memcache');
+            }
         }
 
         return $memcache;

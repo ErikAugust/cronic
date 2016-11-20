@@ -29,4 +29,12 @@ class CacheTest extends \PHPUnit_Framework_TestCase {
         $this->assertObjectHasAttribute('memcache', new Cache);
     }
 
+    /**
+     * @name testRedisConnection
+     * @description Tests Redis connection
+     */
+    public function testRedisConnection() {
+        $this->assertObjectHasAttribute('redis', new Cache);
+    }
+
 }
