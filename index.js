@@ -16,19 +16,37 @@ program
 
 program.parse(process.argv);
 
+/**
+ * Default - no command
+ */
 if (typeof cmdValue === 'undefined') {
   about();
   process.exit(1);
 }
 
+
+/**
+ * Test command
+ */
 if (cmdValue == 'test') {
   test(envValue);
 }
 
+/**
+ * About command
+ */
 if (cmdValue == 'about') {
   about();
 }
 
+/**
+ * Start command
+ */
+if (cmdValue == 'start') {
+  start(envValue);
+} else {
+  notFound();
+}
 
 /**
  * Methods
@@ -39,10 +57,37 @@ if (cmdValue == 'about') {
  * @description
  */
 function about() {
+
   console.log(
     chalk.bold.red('Cronic (' + version + ')')
   );
+
   process.exit(1);
+}
+
+/**
+ * @name notFound
+ * @description If command is not found - display error
+ */
+function notFound() {
+  console.log(
+    chalk.bold.red('Command not found!')
+  );
+  process.exit(1);
+}
+
+function start(envValue) {
+  var projectName = typeof envValue !== 'undefined' ? envValue : 'project';
+
+  exec('git clone https://github.com/ErikAugust/cronic.git ' + projectName, function(error, stdout, stderr) {
+    if (error) {
+      console.log(error);
+      process.exit(1);
+    }
+    console.log(stdout);
+    console.log(stderr);
+    process.exit(1);
+  });
 }
 
 /**
