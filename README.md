@@ -10,4 +10,6 @@ Node, npm, PHP7, Composer, MySQL, Redis
 
 *Installation*
 
-1. Run ```npm install -g``` in the root directory. This will create the "cronic" command line tool. 
+1. ```npm install -g cronic``` in a sub-root directory. This will create the "cronic" command line tool.
+ 
+2. ```cronic start <name>``` to start a new project with a specified name.

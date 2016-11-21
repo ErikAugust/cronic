@@ -3,49 +3,48 @@ var program = require('commander');
 var chalk = require('chalk');
 var exec = require('child_process').exec;
 
-var version = '0.0.3';
+var version = '0.0.5';
 
+program.version(version);
+
+
+
+/**
+ * Test
+ */
 program
-  .version(version)
-  .arguments('<cmd> [env]')
-  .action(function (cmd, env) {
-    cmdValue = cmd;
-    envValue = env;
+  .command('test [name]')
+  .description('Runs PHPUnit tests, runs a single test if test name specified')
+  .action(function (name) {
+    test(name);
+  });
+
+
+/**
+ * About
+ */
+program
+  .command('about')
+  .description('About the Cronic Framework')
+  .action(function () {
+    about();
+  });
+
+/**
+ * Start
+ */
+program
+  .command('start <name>')
+  .description('Starts new project within specified name')
+  .action(function (name) {
+    start(name);
   });
 
 
 program.parse(process.argv);
 
-/**
- * Default - no command
- */
-if (typeof cmdValue === 'undefined') {
-  about();
-  process.exit(1);
-}
-
-
-/**
- * Test command
- */
-if (cmdValue == 'test') {
-  test(envValue);
-}
-
-/**
- * About command
- */
-if (cmdValue == 'about') {
-  about();
-}
-
-/**
- * Start command
- */
-if (cmdValue == 'start') {
-  start(envValue);
-} else {
-  notFound();
+if (!process.argv.slice(2).length) {
+  program.outputHelp();
 }
 
 /**
@@ -59,23 +58,16 @@ if (cmdValue == 'start') {
 function about() {
 
   console.log(
-    chalk.bold.red('Cronic (' + version + ')')
+    chalk.bold.red('\nCronic (' + version + ')\n')
   );
 
   process.exit(1);
 }
 
 /**
- * @name notFound
- * @description If command is not found - display error
+ * @name start
+ * @description Starts new project
  */
-function notFound() {
-  console.log(
-    chalk.bold.red('Command not found!')
-  );
-  process.exit(1);
-}
-
 function start(envValue) {
   var projectName = typeof envValue !== 'undefined' ? envValue : 'project';
 
