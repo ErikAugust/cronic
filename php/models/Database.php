@@ -21,10 +21,30 @@ class Database {
     /**
      * Database constructor
      * @param string $database
+     * @return self
+     * @throws \Exception
      */
     public function __construct(string $database = 'default') {
 
-        $this->capsule = self::capsuleSetup($database);
+        /**
+         * Load app settings from INI file:
+         */
+        if (!$this->settings = parse_ini_file(APP_SETTINGS_DIR, TRUE)) {
+            throw new \Exception('Unable to open ' . APP_SETTINGS_DIR . '.');
+        }
+
+        if ($this->settings['capsule']) {
+            $this->capsule = self::capsuleSetup($database);
+
+            if ($this->settings['eloquent']) {
+                $this->capsule->bootEloquent();
+            }
+        }
+
+        if ($this->settings['pdo']) {
+            $this->pdo = self::pdoSetup($database);
+        }
+
         return $this;
     }
 
@@ -38,13 +58,6 @@ class Database {
             throw new \Exception('Unable to open ' . DB_SETTINGS_DIR . '.');
         }
 
-        /**
-         * Load app settings from INI file:
-         */
-
-        if (!$app_settings = parse_ini_file(APP_SETTINGS_DIR, TRUE)) {
-            throw new \Exception('Unable to open ' . APP_SETTINGS_DIR . '.');
-        }
 
         /**
          * Add connection:
@@ -59,10 +72,6 @@ class Database {
             'collation' => $settings[$connection]['collation'],
             'prefix'    => $settings[$connection]['prefix'],
         ]);
-
-        if ($app_settings['eloquent']) {
-            $capsule->bootEloquent();
-        }
 
         return $capsule;
     }

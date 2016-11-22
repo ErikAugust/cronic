@@ -22,11 +22,28 @@ class DatabaseTest extends \PHPUnit_Framework_TestCase {
      */
 
     /**
+     * @name testCapsuleConnection
+     * @description Tests Capsule connection
+     */
+    public function testCapsuleConnection() {
+        $settings = parse_ini_file(APP_SETTINGS_DIR, TRUE);
+
+        if ($settings['capsule']) {
+            $this->assertObjectHasAttribute('capsule', new Database);
+        }
+    }
+
+    /**
      * @name testPDOConnection
-     * @description Tests Memcache connection (Memcache, or Memcached)
+     * @description Tests PDO connection
      */
     public function testPDOConnection() {
-        $this->assertObjectHasAttribute('PDO', new Database);
+        $settings = parse_ini_file(APP_SETTINGS_DIR, TRUE);
+
+        if ($settings['pdo']) {
+            $this->assertObjectHasAttribute('pdo', new Database);
+        }
     }
+
 
 }

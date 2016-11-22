@@ -26,7 +26,12 @@ class CacheTest extends \PHPUnit_Framework_TestCase {
      * @description Tests Memcache connection (Memcache, or Memcached)
      */
     public function testMemcacheConnection() {
-        $this->assertObjectHasAttribute('memcache', new Cache);
+
+        $settings = parse_ini_file(APP_SETTINGS_DIR, TRUE);
+
+        if ($settings['memcache']) {
+            $this->assertObjectHasAttribute('memcache', new Cache);
+        }
     }
 
     /**
@@ -34,7 +39,11 @@ class CacheTest extends \PHPUnit_Framework_TestCase {
      * @description Tests Redis connection
      */
     public function testRedisConnection() {
-        $this->assertObjectHasAttribute('redis', new Cache);
+        $settings = parse_ini_file(APP_SETTINGS_DIR, TRUE);
+
+        if ($settings['redis']) {
+            $this->assertObjectHasAttribute('redis', new Cache);
+        }
     }
 
 }

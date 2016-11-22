@@ -9,9 +9,28 @@ namespace models;
 
 class Cache {
 
+    /**
+     * Cache constructor.
+     * @param string $redis
+     * @param string $memcache
+     * @throws \Exception
+     */
     public function __construct(string $redis = 'default', string $memcache = 'default') {
-        $this->redis = self::redisSetup($redis);
-        $this->memcache = self::memcacheSetup($memcache);
+
+        /**
+         * Load app settings from INI file:
+         */
+        if (!$this->settings = parse_ini_file(APP_SETTINGS_DIR, TRUE)) {
+            throw new \Exception('Unable to open ' . APP_SETTINGS_DIR . '.');
+        }
+
+        if ($this->settings['redis']) {
+            $this->redis = self::redisSetup($redis);
+        }
+
+        if ($this->settings['memcache']) {
+            $this->memcache = self::memcacheSetup($memcache);
+        }
 
         return $this;
     }
