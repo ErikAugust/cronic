@@ -9,7 +9,7 @@ namespace models;
 
 class Cache {
 
-    public function __construct($redis = 'default', $memcache = 'default') {
+    public function __construct(string $redis = 'default', string $memcache = 'default') {
         $this->redis = self::redisSetup($redis);
         $this->memcache = self::memcacheSetup($memcache);
 
@@ -21,7 +21,7 @@ class Cache {
      * @return \Redis
      * @throws \Exception
      */
-    public static function redisSetup($connection = 'default') {
+    public static function redisSetup(string $connection = 'default'): \Redis {
         /**
          * Load from INI file:
          */
@@ -32,6 +32,7 @@ class Cache {
         $redis = new \Redis;
         $redis->connect($settings[$connection]['host']);
         return $redis;
+
     }
 
     /**
@@ -41,7 +42,7 @@ class Cache {
      * @return \Memcache|\Memcached
      * @throws \Exception
      */
-    public static function memcacheSetup($connection = 'default') {
+    public static function memcacheSetup(string $connection = 'default') {
         /**
          * Load from INI file:
          */

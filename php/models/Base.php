@@ -12,7 +12,7 @@ class Base {
     protected $db;
 	protected $cache;
 
-    public function __construct($database = 'default') {
+    public function __construct(string $database = 'default') {
 
 		$this->database = new Database($database);
         $this->cache = new Cache();
