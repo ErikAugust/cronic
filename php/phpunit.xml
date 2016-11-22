@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit 
-	bootstrap="base_include.php"
+	bootstrap="base.php"
 	colors="true">
     <testsuites>
-        <testsuite name="PHANG Test Suite">
+        <testsuite name="Cronic Test Suite">
             <directory>./models/Test/</directory>
         </testsuite>
     </testsuites>

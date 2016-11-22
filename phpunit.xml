@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit 
-	bootstrap="php/base_include.php"
+	bootstrap="php/base.php"
 	colors="true">
     <testsuites>
         <testsuite name="Cronic Test Suite">

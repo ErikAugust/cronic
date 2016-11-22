@@ -9,7 +9,7 @@
 /**
  * Base include file - adds vendor autoload, etc.
  */
-require_once __DIR__.'/../php/base_include.php';
+require_once __DIR__.'/../php/base.php';
 
 /**
  * Use Symfony Components:
