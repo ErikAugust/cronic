@@ -7,7 +7,15 @@ var version = '0.0.5';
 
 program.version(version);
 
-
+/**
+ * Migrate (Phinx)
+ */
+program
+  .command('migrate')
+  .description('Runs Phinx database migration')
+  .action(function (name) {
+    migrate(name);
+  });
 
 /**
  * Test
@@ -65,6 +73,22 @@ function about() {
 }
 
 /**
+ * @name migrate
+ * @description Runs Phinx database migration command
+ */
+function migrate() {
+  exec('php php/vendor/bin/phinx migrate -c php/config/phinx.php', function(error, stdout, stderr) {
+    if (error) {
+      console.log(stdout);
+      console.log(stderr);
+      process.exit(1);
+    }
+    console.log(stdout);
+    process.exit(1);
+  });
+}
+
+/**
  * @name start
  * @description Starts new project
  */
@@ -73,11 +97,11 @@ function start(envValue) {
 
   exec('git clone https://github.com/ErikAugust/cronic.git ' + projectName, function(error, stdout, stderr) {
     if (error) {
-      console.log(error);
+      console.log(stdout);
+      console.log(stderr);
       process.exit(1);
     }
     console.log(stdout);
-    console.log(stderr);
     process.exit(1);
   });
 }
@@ -92,11 +116,12 @@ function test(envValue) {
 
   exec('php/vendor/bin/phpunit ' + singleTest, function(error, stdout, stderr) {
     if (error) {
-      console.error(error);
+      console.log(stdout);
+      console.log(stderr);
       process.exit(1);
     }
+
     console.log(stdout);
-    console.log(stderr);
     process.exit(1);
   });
 }

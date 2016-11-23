@@ -15,8 +15,8 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Database {
 
-    protected $pdo;
-    protected $capsule;
+    public $pdo;
+    public $capsule;
 
     /**
      * Database constructor
@@ -72,6 +72,8 @@ class Database {
             'collation' => $settings[$connection]['collation'],
             'prefix'    => $settings[$connection]['prefix'],
         ]);
+
+        $capsule->setAsGlobal();
 
         return $capsule;
     }
