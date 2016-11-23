@@ -76,7 +76,7 @@ Runs Phinx database migration command
 ```cronic about```
 About the Cronic Framework
 
-# Coming Soon
+## Coming Soon
 
 - Generator Commands w/ Yeoman - classes, controllers, tests, routes, migrations, and more
 - Quickstart Wizard - the command-line will take care of everything
