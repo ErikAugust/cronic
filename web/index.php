@@ -3,7 +3,6 @@
 /**
  * @description Cronic - Front Controller (index.php)
  * @author Erik August Johnson <erik@erikaugust.com>
- * @version 0.0.1
  */
 
 /**
@@ -33,7 +32,6 @@ use Silex\Application;
  */
 use models\Base;
 use controllers\AppController;
-
 
 
 /**

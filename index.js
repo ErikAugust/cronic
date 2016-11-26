@@ -2,31 +2,13 @@
 var program = require('commander');
 var chalk = require('chalk');
 var exec = require('child_process').exec;
+var childProcess = require('child_process');
+var figlet = require('figlet');
 
-var version = '0.0.5';
+
+var version = '0.0.7';
 
 program.version(version);
-
-/**
- * Migrate (Phinx)
- */
-program
-  .command('migrate')
-  .description('Runs Phinx database migration')
-  .action(function (name) {
-    migrate(name);
-  });
-
-/**
- * Test
- */
-program
-  .command('test [name]')
-  .description('Runs PHPUnit tests, runs a single test if test name specified')
-  .action(function (name) {
-    test(name);
-  });
-
 
 /**
  * About
@@ -39,6 +21,27 @@ program
   });
 
 /**
+ * Migrate (Phinx)
+ */
+program
+  .command('migrate')
+  .description('Runs Phinx database migration')
+  .action(function (name) {
+    migrate(name);
+  });
+
+/**
+ * Setup
+ */
+program
+  .command('setup')
+  .description('Setup new project - set app config and default database connection')
+  .action(function () {
+    setup();
+  });
+
+
+/**
  * Start
  */
 program
@@ -46,6 +49,16 @@ program
   .description('Starts new project within specified name')
   .action(function (name) {
     start(name);
+  });
+
+/**
+ * Test
+ */
+program
+  .command('test [name]')
+  .description('Runs PHPUnit tests, runs a single test if test name specified')
+  .action(function (name) {
+    test(name);
   });
 
 
@@ -65,11 +78,21 @@ if (!process.argv.slice(2).length) {
  */
 function about() {
 
-  console.log(
-    chalk.bold.red('\nCronic (' + version + ')\n')
-  );
+  figlet('Cronic!!!', function(err, data) {
+    if (err) {
+      console.log(
+        chalk.bold.red('\nCronic (' + version + ')\n')
+      );
+      process.exit(1);
+    }
+    console.log(data);
+    console.log(
+      chalk.bold.red('\nCronic (' + version + ')\n')
+    );
 
-  process.exit(1);
+    process.exit(1);
+  });
+
 }
 
 /**
@@ -86,6 +109,14 @@ function migrate() {
     console.log(stdout);
     process.exit(1);
   });
+}
+
+/**
+ * @name setup
+ * @description Setup project - application config, and default database
+ */
+function setup() {
+  childProcess.spawn('yo', ['cronic'], { stdio: 'inherit' });
 }
 
 /**

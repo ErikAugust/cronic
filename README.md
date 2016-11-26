@@ -9,9 +9,9 @@ Cronic is a PHP framework to rule them all. Or, in other words, it's yet another
 
 But really, the aim here is combine the best components across the ecosystem and combine them with a flexible and customizable CLI tool. 
 
-![Cronic](https://github.com/ErikAugust/cronic/blob/master/cronic.jpg)
+![Cronic](https://raw.githubusercontent.com/ErikAugust/cronic/master/cronic.jpg)
 
-## Current Version 0.0.5
+## Current Version 0.0.7
 
 "The first draft of anything is shit." - David Heinemeier Hansson
 
@@ -23,11 +23,12 @@ Please use at your own risk.
 
 1. Node
 2. npm
-3. PHP 7
-4. Composer
-5. Database - MySQL, Postgres, SQL Server, SQLite*
-6. Memcached* - optional
-7. Redis* - optional
+3. Yeoman
+4. PHP 7
+5. Composer
+6. Database - MySQL, Postgres, SQL Server, SQLite*
+7. Memcached* - optional
+8. Redis* - optional
 
 ## Components Used
 
@@ -45,24 +46,29 @@ Cronic picks and chooses from across the PHP ecosystem, including:
 - Unit Testing: PHPUnit
 - Documentation: PHPDoc
 
-## Installation
+## Installation - Simple 5 Steps
 
-1. ```npm install -g cronic``` in a sub-root directory. This will create the "cronic" command line tool.
+1. ```npm install -g yo generator-cronic``` to install Yeoman (if necessary), and the Cronic file generator.
+
+2. ```npm install -g cronic``` in a sub-root directory. This will create the "cronic" command line tool.
  
-2. ```cronic start <name>``` to start a new project with a specified name.
+3. ```cronic start <name>``` to start a new project with a specified name.
 
-3. ```cp help/app_example.ini php/config/app.ini``` to add your application configuration
+4. ```cd <name> && cronic setup``` in your newly created project directory.
 
-4. ```cp help/database_example.ini php/config/database.ini``` to add your database configuration
-
-5. ```cp help/redis_example.ini php/config/redis.ini``` to add Redis config, if using*
-
-6. ```cp help/memcache_example.ini php/config/memcache.ini``` to add Memcache config, if using*
-
-7. ```cd php && composer install``` to install vendor packages
+5. ```cd php && composer install``` to install vendor PHP packages.
 
 
 ## Commands
+
+```cronic about```
+About the Cronic Framework
+
+```cronic migrate```
+Runs Phinx database migration command
+
+```cronic setup```
+Quickstart Setup - sets app config and default database connection
 
 ```cronic start [name]```
 Starts a new project with specified name - name used as directory name
@@ -70,15 +76,9 @@ Starts a new project with specified name - name used as directory name
 ```cronic test [name]```
 Runs all PHPUnit tests; if test name is specified, runs single test
 
-```cronic migrate```
-Runs Phinx database migration command
-
-```cronic about```
-About the Cronic Framework
-
 ## Coming Soon
 
 - Generator Commands w/ Yeoman - classes, controllers, tests, routes, migrations, and more
-- Quickstart Wizard - the command-line will take care of everything
+- COMPLETED: Quickstart Wizard - the command-line will take care of everything
 - Bootstrap Template Collection - Create slick responsive web applications in no time
 - More In-Depth Documentation and Examples
