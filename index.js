@@ -21,6 +21,16 @@ program
   });
 
 /**
+ * Generate
+ */
+program
+  .command('generate <type>')
+  .description('About the Cronic Framework')
+  .action(function (type) {
+    generate(type);
+  });
+
+/**
  * Migrate (Phinx)
  */
 program
@@ -94,6 +104,17 @@ function about() {
   });
 
 }
+
+/**
+ * @name generate
+ * @description
+ */
+function generate(type) {
+  if (type == 'controller') {
+    childProcess.spawn('yo', ['cronic:controller'], { stdio: 'inherit' });
+  }
+}
+
 
 /**
  * @name migrate
