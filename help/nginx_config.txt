@@ -33,11 +33,10 @@ server {
 	#
 	# include snippets/snakeoil.conf;
 
-	root /var/www/phang2/web;
+	root /var/www/cronic/public;
 
 	# Add index.php to the list if you are using PHP
 	index index.php index.html index.htm index.nginx-debian.html;
-
 	server_name _;
 
 	location / {

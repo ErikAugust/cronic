@@ -50,13 +50,15 @@ Cronic picks and chooses from across the PHP ecosystem, including:
 
 1. ```npm install -g yo generator-cronic``` to install Yeoman (if necessary), and the Cronic file generator.
 
-2. ```npm install -g cronic``` in a sub-root directory. This will create the "cronic" command line tool.
+2. ```npm install -g cronic``` in a sub-root directory. This will create the 'cronic' command line tool.
  
 3. ```cronic start <name>``` to start a new project with a specified name.
 
 4. ```cd <name> && cronic setup``` in your newly created project directory.
 
 5. ```cd php && composer install``` to install vendor PHP packages.
+
+6. ```mkdir session``` to create a 'session' folder for PHP sessions.
 
 
 ## Commands
