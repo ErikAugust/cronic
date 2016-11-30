@@ -11,7 +11,7 @@ But really, the aim here is combine the best components across the ecosystem and
 
 ![Cronic](https://raw.githubusercontent.com/ErikAugust/cronic/master/cronic.jpg)
 
-## Current Version 0.0.7
+## Current Version 0.0.9
 
 "The first draft of anything is shit." - David Heinemeier Hansson
 
@@ -69,10 +69,13 @@ About the Cronic Framework
 ```cronic migrate```
 Runs Phinx database migration command
 
+```cronic run <name> [arguments...]```
+Runs any script located in the ```php/scripts``` directory
+
 ```cronic setup```
 Quickstart Setup - sets app config and default database connection
 
-```cronic start [name]```
+```cronic start <name>```
 Starts a new project with specified name - name used as directory name
 
 ```cronic test [name]```

@@ -6,7 +6,7 @@ var childProcess = require('child_process');
 var figlet = require('figlet');
 
 
-var version = '0.0.7';
+var version = '0.0.9';
 
 program.version(version);
 
@@ -25,7 +25,7 @@ program
  */
 program
   .command('generate <type>')
-  .description('About the Cronic Framework')
+  .description('Generate a new file from template - types: controller, script')
   .action(function (type) {
     generate(type);
   });
@@ -38,6 +38,16 @@ program
   .description('Runs Phinx database migration')
   .action(function (name) {
     migrate(name);
+  });
+
+/**
+ * Run (Script)
+ */
+program
+  .command('run <name> [arguments...]')
+  .description('Runs a script from the scripts directory')
+  .action(function (name, arguments) {
+    run(name, arguments);
   });
 
 /**
@@ -113,8 +123,11 @@ function generate(type) {
   if (type == 'controller') {
     childProcess.spawn('yo', ['cronic:controller'], { stdio: 'inherit' });
   }
-}
 
+  if (type == 'script') {
+    childProcess.spawn('yo', ['cronic:script'], { stdio: 'inherit' });
+  }
+}
 
 /**
  * @name migrate
@@ -130,6 +143,15 @@ function migrate() {
     console.log(stdout);
     process.exit(1);
   });
+}
+/**
+ * @name run
+ * @descriptions Runs script by path/name that is located in the php/scripts directory
+ * @param name
+ */
+function run(name, arguments ) {
+  var combinedArgs = ['php/scripts/'+name+'.php'].concat(arguments);
+  childProcess.spawn('php', combinedArgs, { stdio: 'inherit' });
 }
 
 /**
