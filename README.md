@@ -81,9 +81,17 @@ Starts a new project with specified name - name used as directory name
 ```cronic test [name]```
 Runs all PHPUnit tests; if test name is specified, runs single test
 
+### Generator - Commands
+
+```cronic generate controller <name>```
+Generates controller based on name in ```php/controllers```
+
+```cronic generate script <name>```
+Generates script based on name in ```php/scripts```
+
 ## Coming Soon
 
-- Generator Commands w/ Yeoman - classes, controllers, tests, routes, migrations, and more
+- Generator Commands w/ Yeoman - classes, controllers [x], tests, scripts [x], routes, migrations, and more
 - COMPLETED: Quickstart Wizard - the command-line will take care of everything
 - Bootstrap Template Collection - Create slick responsive web applications in no time
 - More In-Depth Documentation and Examples
