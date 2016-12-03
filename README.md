@@ -11,7 +11,7 @@ But really, the aim here is combine the best components across the ecosystem and
 
 ![Cronic](https://raw.githubusercontent.com/ErikAugust/cronic/master/cronic.jpg)
 
-## Current Version 0.0.9
+## Current Version 0.1.0
 
 "The first draft of anything is shit." - David Heinemeier Hansson
 
@@ -83,11 +83,11 @@ Runs all PHPUnit tests; if test name is specified, runs single test
 
 ### Generator - Commands
 
-```cronic generate controller <name>```
-Generates controller based on name in ```php/controllers```
+```cronic generate controller```
+Generates controller in ```php/controllers```
 
 ```cronic generate script <name>```
-Generates script based on name in ```php/scripts```
+Generates script in ```php/scripts```
 
 ## Coming Soon
 
