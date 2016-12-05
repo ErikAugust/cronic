@@ -6,7 +6,7 @@ var childProcess = require('child_process');
 var figlet = require('figlet');
 
 
-var version = '0.1.0';
+var version = '0.1.1';
 
 program.version(version);
 

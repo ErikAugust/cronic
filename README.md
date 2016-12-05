@@ -11,7 +11,7 @@ But really, the aim here is combine the best components across the ecosystem and
 
 ![Cronic](https://raw.githubusercontent.com/ErikAugust/cronic/master/cronic.jpg)
 
-## Current Version 0.1.0
+## Latest Version 0.1.1
 
 "The first draft of anything is shit." - David Heinemeier Hansson
 
@@ -46,7 +46,7 @@ Cronic picks and chooses from across the PHP ecosystem, including:
 - Unit Testing: PHPUnit
 - Documentation: PHPDoc
 
-## Installation - Simple 5 Steps
+## Installation - Simple Six Steps
 
 1. ```npm install -g yo generator-cronic``` to install Yeoman (if necessary), and the Cronic file generator.
 
@@ -86,7 +86,7 @@ Runs all PHPUnit tests; if test name is specified, runs single test
 ```cronic generate controller```
 Generates controller in ```php/controllers```
 
-```cronic generate script <name>```
+```cronic generate script```
 Generates script in ```php/scripts```
 
 ## Coming Soon
